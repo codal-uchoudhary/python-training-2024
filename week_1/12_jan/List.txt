@@ -1,0 +1,28 @@
+Work in List.py:
+
+1> what is list
+
+2> Create List
+
+3> Access list items in diffrents ways
+- indexing
+- negative indexing
+- range of index
+
+4> Check if item exist or not in list
+
+5> Change items in list
+
+6> Add list items
+
+7> Remove list items
+
+8> Looping throgh list in difrent ways
+
+9> perform Sorting on List
+
+10> Copy list
+
+11> Join two list
+
+12> methos : append(),clear(),copy(),del(),extends(),sort(),index(),pop(),remove(),reverse()
