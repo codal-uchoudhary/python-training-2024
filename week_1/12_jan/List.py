@@ -200,3 +200,49 @@ print(ll2)
 ll1 = ll1+ll2
 print(ll1)
 
+
+
+#________________________________List Comprehension_________________________________
+
+# List comprehension offers a shorter syntax when you want to create a new list based on the values of an existing list.
+
+list1 = [1,2,3,4,5,6,7,8,9,10]
+
+# now we want a list with only even number
+
+even_list = [ i for i in list1 if i%2==0]
+
+print("even list is ",even_list)
+
+greater_than_5 = [i for i in list1 if i>5]
+
+print(greater_than_5)
+
+
+# condition is like filter that filter the items in a new list
+
+# this work on any itrable data
+
+less_than_5 = [i for i in range(10) if i<5]
+
+print(less_than_5)
+
+tup = (1,2,3,4,5)
+
+list_tup = [i for i in tup if not (i==2 or i==4)]
+
+print(list_tup)
+
+# Exression: expression work as the outcome of item from the itrable data
+
+square = [i*i for i in tup ]
+
+print(square)
+
+update_tup = [i if i!=1 else 10 for i in tup]
+
+print(update_tup)
+
+
+
+
