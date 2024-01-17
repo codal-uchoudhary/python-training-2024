@@ -108,3 +108,26 @@ print(lis[-3:-1],tup[-3:-1])
 print(lis[2:],tup[2:])
 print(lis[::-1],tup[::-1])
 
+
+
+#____________________________zip functoin________________________________
+
+#zip(): function returns a zip object, which is an iterator of tuples
+
+a = (1,2,3,4,5)
+b = (100,200,300,400)
+
+c = zip(a,b)
+
+for i in c:
+    print(i)
+
+a = [1,2,3]
+b = [100,200]
+x = (-1,-2)
+c = zip(a,b,x,a)
+
+for i in c:
+    print(i)
+
+print(c)
