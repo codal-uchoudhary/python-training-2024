@@ -1,0 +1,1 @@
+this file created using write mode of the file funciton
