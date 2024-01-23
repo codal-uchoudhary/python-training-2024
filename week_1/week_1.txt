@@ -1,1 +1,26 @@
-week file
+16_jan:
+- conditional statement
+- loops
+- variables and datatype
+- itrables (list,tuple,dictionary,set)
+- map,reduce,filter functions
+- lambada function
+
+17_jan:
+- class and objects
+- encapsulation
+- inheritance
+- polymorphism
+- usage of pip
+
+18_jan
+- classMethods and staticMethods
+- decorators
+- defalutdict
+- orderedDict
+- functional programming
+- tuple vs list
+
+19_jan
+- file handling  (open,write,delete,append,create)
+- working with json file (convertion,json data,create json file,read json file,access json file)
