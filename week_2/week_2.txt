@@ -1,0 +1,22 @@
+22 jan:
+- work with CSV files (write and read data)
+- processing and handling of big files in python (break big file into chunks)
+- how to create modules in python (__name__== '__main__')
+
+23 jan:
+- postgresSQL setup with python
+- connectivity of database with python script
+- CRUD oprations(create,read,delete,update)
+
+24 jan:
+- CRUD oprations practice on Hackerank
+- problem solving in python programming language
+- MVC and MVT
+- introduction to Django framework
+
+25 jan:
+- Django setup in local machine
+- joins in SQL
+- pagination
+- keys in SQL
+- indexing
