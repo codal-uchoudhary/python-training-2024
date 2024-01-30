@@ -23,8 +23,4 @@
 
 19_jan
 - file handling  (open,write,delete,append,create)
-<<<<<<< HEAD
 - working with json file (convertion,json data,create json file,read json file,access json file)
-=======
-- working with json file (convertion,json data,create json file,read json file,access json file)
->>>>>>> fbaa2836c438a3c707471af902b0f3eb603a65f1
