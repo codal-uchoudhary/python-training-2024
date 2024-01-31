@@ -12,6 +12,7 @@ def result(request):
     num2 = int(request.GET['number_2'])
     oprator = request.GET['oprator']
     ans = None
+    oprator = oprator.strip()
     if oprator == '+':
         ans = num1+num2
     elif oprator == '-':
