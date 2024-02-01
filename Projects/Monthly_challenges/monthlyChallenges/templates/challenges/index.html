@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+   <h1>All the challenges</h1>
+   <ul>
+    {%for i in list%}
+    <li><h2><a href="{{i}}">{{i|title}}</a></h2></li>
+    {% endfor %}
+   </ul> 
+{% endblock %}

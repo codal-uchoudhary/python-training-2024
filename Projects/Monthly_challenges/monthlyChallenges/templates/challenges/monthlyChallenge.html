@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{month}}</title>
+</head>
+<body>
+    {% include 'header.html' %}
+    <h1>The challenge of {{month|title}} is :</h1>
+    {% if text == None %}
+    <h2>no challenge for this {{month}}</h2>
+    {% else %}
+    <h2>{{text}}</h2>
+
+    {%endif%}
+</body>
+</html>  {% endcomment %}
+
+{% comment %} 
+{% block title%}{{month}}{%endblock%} {% endcomment %}
+
+{% block body%}
+    <h1>The challenge of {{month|title}} is :</h1>
+    {% if text == None %}
+    <h2>no challenge for this {{month}}</h2>
+    {% else %}
+    <h2>{{text}}</h2>
+
+    {%endif%}
+{%endblock%}
