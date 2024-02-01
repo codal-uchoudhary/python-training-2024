@@ -1,0 +1,53 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block title%}index file{%endblock%}
+
+{% block css_file%}
+<link rel="stylesheet" href="{% static "Blog/index.css" %}">
+{%endblock%}
+
+{%block content%}
+
+<header id="main-navigation">
+    <h1><a href="#"></a>My Blogs</h1>
+    <nav>
+        <a href="#">All posts</a>
+    </nav>
+</header>
+
+<section id="welcome">
+<header>
+    <img src="" alt="img">
+    <h2>Ummed's Blog</h2>
+</header>
+<p>Hi i am Ummed,this is my page </p>
+</section>
+
+<section id="latest-posts">
+    <h2>My latest blog</h2>
+
+    <ul>
+        <li>
+            <article class="post">
+                <a href="#">
+                    <img src="" alt="article img">
+                    <div class="post__content">
+                        <h3>power of Django</h3>
+                        <p>Lorem ipsum is placeholder text commonly used in the graphic, 
+                           print, and publishing industries for previewing layouts 
+                           and visual mockups.
+                        </p>
+                    </div>
+                </a>
+            </article>
+        </li>
+    </ul>
+</section>
+
+<section id="about">
+<h2>what i do </h2>
+<p>i am learning Django ,i am learning Djangoi am learning Djangoi am learning Django</p>
+<p>i am learning Django i am learning Django i am learning Django</p>
+</section>
+{%endblock%}
