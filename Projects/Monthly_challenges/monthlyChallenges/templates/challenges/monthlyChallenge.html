@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
+
+{% comment %} <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,4 +18,17 @@
 
     {%endif%}
 </body>
-</html> 
+</html>  {% endcomment %}
+
+{% comment %} 
+{% block title%}{{month}}{%endblock%} {% endcomment %}
+
+{% block body%}
+    <h1>The challenge of {{month|title}} is :</h1>
+    {% if text == None %}
+    <h2>no challenge for this {{month}}</h2>
+    {% else %}
+    <h2>{{text}}</h2>
+
+    {%endif%}
+{%endblock%}
