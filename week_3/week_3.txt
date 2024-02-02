@@ -1,0 +1,40 @@
+29_jan:
+- create calculator django project
+- create calc app in the calculator project 
+- create template files (calculator.html , home.html,result.html)
+- create urls.py files in the calc app and set all the routes
+- write all the calculator functions and logic in the views.py file present in calc app
+- accepts user input by using GET method
+- return html code using render method
+- learn tags
+
+30_jan:
+- create Django project to learn urls and views
+- learn slug in the url
+- learn HttpResposeRedirect
+- learn reverse function
+- learn dynamic content in templates
+- learn inheritance in html files ({% extends 'base.html' %})
+
+31_jan:
+- create monthly_challanges django project
+- learn more about static files and templates (add globaly static and templates )
+- learn more about urls(slug and dynamic urls)
+- learn incluse template file using include tags
+- learn if,for and block tags
+- learn filter (use filter in html file like add,title)
+- learn more on DTL (Django template language)
+
+1_feb:
+- create Blog application in myWeb Django project
+- practice templates , urls and views
+- adding static files (images and css file)
+- incluse and inheritance html files
+- adding 404 template
+- use for tag and filter in html file to render list items
+
+2_feb:
+- render dynamic content in Blog app in myWeb Django project
+- manage urls in Blog app
+- learn models in Django project
+- create Book_store Django project to practice models in django
