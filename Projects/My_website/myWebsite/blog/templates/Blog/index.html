@@ -1,0 +1,39 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block title%}index file{%endblock%}
+
+{% block css_file%}
+<link rel="stylesheet" href="{% static "Blog/index.css" %}">
+<link rel="stylesheet" href="{% static "Blog/post.css" %}">
+{%endblock%}
+
+{%block content%}
+
+
+<section id="welcome">
+    <header>
+        <img src="{% static "blog/images/cat.png" %}" alt="img">
+        <h2>Ummed's Blog</h2>
+    </header>
+    <p>Hi i am Ummed,</p>
+</section>
+
+<section id="latest-posts">
+    <h2>My latest blog</h2>
+
+    <ul>
+        {% comment %} {% include "blog/includes/post.html" %} {% endcomment %}
+        {% for i in posts %}
+        {% include "blog/includes/post.html" %}
+        {% endfor %}
+    </ul>
+</section>
+
+<section id="about">
+<h2>what i do </h2>
+<p>I turn code into websites</p>
+<p>I build logics and talk with important clients on the phone</p>
+<p>I help people manage their money.</p>
+</section>
+{%endblock%}
