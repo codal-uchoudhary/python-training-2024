@@ -1,0 +1,11 @@
+{% extends 'bookOutlet/base.html' %}
+
+{% block title %} index page{% endblock %}
+
+{% block content %}
+<ul>
+    {% for i in Books %}
+    <li>{{i.title}} rating is :{{i.rating}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
