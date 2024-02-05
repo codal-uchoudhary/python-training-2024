@@ -5,7 +5,10 @@
 {% block content %}
 <ul>
     {% for i in Books %}
-    <li>{{i.title}} rating is :{{i.rating}}</li>
+    <li><a href={% url "book_detail" i.id %}>{{i.title}}</a> rating is :{{i.rating}}</li>
     {% endfor %}
 </ul>
+<h1>Total number of books is {{count}}</h1>
+<h1>Avg rating  of books is {{avgrating.rating__avg}}</h1>
+
 {% endblock %}
