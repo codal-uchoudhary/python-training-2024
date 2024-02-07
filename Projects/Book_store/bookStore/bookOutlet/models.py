@@ -7,7 +7,8 @@ class Country(models.Model):
 
 
 class Address(models.Model):
-    country = models.CharField(max_length=50)
+    #country = models.CharField(max_length=50)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE,null=True)
     state = models.CharField(max_length=50)
 
     def full_address(self):
