@@ -1,0 +1,17 @@
+5_feb:
+- add models bookOutlet app in bookStore project
+- create one-to-many relation between Book and Author model
+- register model in admin.py in bookOutlet app
+- execute makemigrations and migrate command
+- insert in model and get data from model using python shell
+- update and delete model using python shell
+- handlel modles using admin page
+
+6_feb:
+- Create models like Country,Address in bookOutlet app and create one-to-one and many-to-many relation between them
+- create models like Post ,Author,Tag in Blog app in myWeb project
+- register models for admin
+- create one-to-many relation between Author and Post model in Blog app
+- create many-to-many relation in Post and Tag modle
+- fetching data for html pages to display
+- add filters in modles in admin page
