@@ -3,6 +3,7 @@
 {% block title %} index page{% endblock %}
 
 {% block content %}
+<button><a href="/form">Account</a></button>
 <ul>
     {% for i in Books %}
     <li><a href={% url "book_detail" i.id %}>{{i.title}}</a> rating is :{{i.rating}}</li>
