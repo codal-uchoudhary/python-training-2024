@@ -1,0 +1,33 @@
+.site-footer{
+    height: 200px;
+    background-color: rgb(41, 39, 39);
+}
+.container1{
+    height:70%;
+    background-color: brown;
+    display: flex;
+}
+#container1_1{
+    width: 50%;
+    height: 80%;
+    background-color: rgb(67, 40, 40);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 1%;
+}
+#container1_2{
+    width: 20%;
+    height: 80%;
+    background-color: rgb(47, 43, 43);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 1%;
+}
+#container1_3{
+    width: 20%;
+    height: 80%;
+    background-color: rgb(59, 50, 50);
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 1%;
+}
