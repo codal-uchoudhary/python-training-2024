@@ -9,10 +9,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
     </head>
+    {% if user.is_authenticated %}
+    <h3>Heelo {{user.first_name}}</h3>
+    <button><a href="form/logout">Log out</a></button>
+    {% else %}
+    <button><a href="form/registration">Register</a></button>
+    <button><a href="form/login">Login</a></button>
+    {% endif %}
+
+    <br>
+    <br>
+    <br>
     <body>
        <form method="POST">
        {% csrf_token %}
-        <lable for="name">Your name</lable> 
+        <lable for="name">dummy form</lable> 
         <input id="name" name="uname" type="text"> 
         <button type="submit ">send</button>
        </form>
