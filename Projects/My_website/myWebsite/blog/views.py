@@ -17,4 +17,5 @@ def postDetail(request,slug):
     
     return render(request,"blog/postDetail.html",{'post':iPost,"post_tag":iPost.tags.all()})
 
-
+def createBlog(request):
+    return render(request,'blog/createBlog.html')

@@ -35,6 +35,7 @@ h3 {
   text-decoration: none;
   color: rgb(224, 211, 211);
   font-weight: bold;
+  margin-right: 40px;
 }
 
 #main-navigation a:hover,
