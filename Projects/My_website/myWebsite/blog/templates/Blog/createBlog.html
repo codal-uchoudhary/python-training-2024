@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Create Blog{% endblock %}
+
+{% block css_file %}
+<link rel="stylesheet" href={% static "Blog/createBlog.css" %}>
+
+{% endblock %}
+
+{% block content%}
+
+<div class="container">
+    <div class="text">
+       Create Blog
+    </div>
+    <form action="#">
+       <div class="form-row">
+          <div class="input-data">
+             <input type="text" required>
+             <div class="underline"></div>
+             <label for="">Title</label>
+          </div>
+          <div class="input-data">
+             <input type="text" required>
+             <div class="underline"></div>
+             <label for="">Excerpt</label>
+          </div>
+       </div>
+       <div class="form-row">
+          <div class="input-data">
+             <input type="text" required>
+             <div class="underline"></div>
+             <label for="">Add tags</label>
+          </div>
+          <div class="input-data">
+             <input type="file" placeholder="Image" required>
+             <div class="underline"></div>
+             {% comment %} <label for="">Upload Image</label> {% endcomment %}
+          </div>
+       </div>
+       <div class="form-row">
+       <div class="input-data textarea">
+          <textarea rows="15" cols="150" required></textarea>
+          <br />
+          <div class="underline"></div>
+          <label for="">Write your Content</label>
+          <br />
+          <div class="form-row submit-btn">
+             <div class="input-data">
+                <div class="inner"></div>
+                <input type="submit" value="Create">
+             </div>
+          </div>
+    </form>
+    </div>
+
+
+
+{%endblock%}
