@@ -14,34 +14,34 @@
     <div class="text">
        Create Blog
     </div>
-    <form action="#">
+    <form method='POST'>
+       {% csrf_token %}
        <div class="form-row">
           <div class="input-data">
-             <input type="text" required>
+             <input type="text" required name='title'>
              <div class="underline"></div>
              <label for="">Title</label>
           </div>
           <div class="input-data">
-             <input type="text" required>
+             <input type="text" required name="excerpt">
              <div class="underline"></div>
              <label for="">Excerpt</label>
           </div>
        </div>
        <div class="form-row">
           <div class="input-data">
-             <input type="text" required>
+             <input type="text" required name='tag'>
              <div class="underline"></div>
              <label for="">Add tags</label>
           </div>
           <div class="input-data">
-             <input type="file" placeholder="Image" required>
+             <input type="file" placeholder="Image" required name='file'>
              <div class="underline"></div>
-             {% comment %} <label for="">Upload Image</label> {% endcomment %}
           </div>
        </div>
        <div class="form-row">
        <div class="input-data textarea">
-          <textarea rows="15" cols="150" required></textarea>
+          <textarea rows="15" cols="150" required name='content'></textarea>
           <br />
           <div class="underline"></div>
           <label for="">Write your Content</label>
@@ -54,6 +54,14 @@
           </div>
     </form>
     </div>
+
+    {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
 
 

@@ -16,7 +16,11 @@
         <img src="{% static "blog/images/cat.png" %}" alt="img">
         <h2>Ummed's Blog</h2>
     </header>
+    {% if user.is_authenticated %}
+    <p>Hello ,{{user.first_name}}</p>
+    {% else %}
     <p>Hi i am Ummed,</p>
+    {% endif%}
 </section>
 
 <section id="latest-posts">
