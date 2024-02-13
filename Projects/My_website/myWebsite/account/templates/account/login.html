@@ -4,10 +4,41 @@
 {% block title%}index file{%endblock%}
 
 {% block css_file%}
-
+<link rel="stylesheet" href={% static "account/login.css" %}>
 {%endblock%}
 
 {%block content%}
-<h1>Login page</h1>
+
+    <div class="wrapper">
+       <div class="title">
+          Login Form
+       </div>
+       <form method='POST'>
+         {% csrf_token %}
+          <div class="field">
+             <input type="text" required name="username">
+             <label>username</label>
+          </div>
+          <div class="field">
+             <input type="password" required name="password"> 
+             <label>Password</label>
+          </div>
+          <div class="content">
+             <div class="checkbox">
+                <input type="checkbox" id="remember-me">
+                <label for="remember-me">Remember me</label>
+             </div>
+             <div class="pass-link">
+                <a href="#">Forgot password?</a>
+             </div>
+          </div>
+          <div class="field">
+             <input type="submit" value="Login">
+          </div>
+          <div class="signup-link">
+             Not a member? <a href={% url "signup_page" %}>Signup now</a>
+          </div>
+       </form>
+    </div>
 {%endblock%}
    
