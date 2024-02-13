@@ -33,15 +33,16 @@ def createBlog(request):
             email = request.user.email
             author=None
 
-            if Author.objects.filter(email=email).exists():
-                author = Author.objects.filter(email=email).first()
+            author_exists=  Author.objects.get(email=email)
+            if author_exists:
+                author = author_exists
             else:
                 first_name = request.user.first_name
                 last_name = request.user.last_name
                 email = request.user.email
                 auth = Author(first_name = first_name,last_name=last_name,email = email)
                 auth.save()
-                author = Author.objects.filter(email=email).first()
+                author = auth
             
             blog = Post(title=title,excerpt=excerpt,content=content,slug=title,image_name=image, author=author)
             blog.save()
@@ -52,10 +53,6 @@ def createBlog(request):
         else:
             messages.success(request, "Please Login")
             return render(request,'blog/createBlog.html')
-
-
-
-
 
     else:
         return render(request,'blog/createBlog.html')
