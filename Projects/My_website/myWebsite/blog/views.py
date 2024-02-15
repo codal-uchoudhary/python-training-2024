@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from datetime import date
 from . models import Post,Author
 from django.contrib import messages
+from rest_framework.response import Response
+from .serializers import blogSerializer
+from rest_framework.views import APIView
 
 
 def startingPage(request):
@@ -57,3 +60,16 @@ def createBlog(request):
     else:
         return render(request,'blog/createBlog.html')
    
+
+class PostApi(APIView):
+    def get(self,request):
+        data = Post.objects.all()
+        serializerData = blogSerializer(data,many=True)
+        return Response(serializerData.data)
+    def post(self,request):
+        return Response({'message':"this is post method "})
+    def patch(self,request):
+        return Response({'message':"this is patch method "})
+    def delete(self,request):
+        return Response({'message':"this is delete method "})
+
