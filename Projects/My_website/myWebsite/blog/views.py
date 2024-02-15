@@ -3,8 +3,8 @@ from datetime import date
 from . models import Post,Author
 from django.contrib import messages
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from .serializers import blogSerializer
+from rest_framework.views import APIView
 
 
 def startingPage(request):
@@ -60,19 +60,16 @@ def createBlog(request):
     else:
         return render(request,'blog/createBlog.html')
    
-@api_view(['GET','POST'])
-def postsApi(request):
-    if request.method == 'GET':
+
+class PostApi(APIView):
+    def get(self,request):
         data = Post.objects.all()
         serializerData = blogSerializer(data,many=True)
         return Response(serializerData.data)
-    
-    else:
-        data = request.data
-        serializer = blogSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
-            
-    
+    def post(self,request):
+        return Response({'message':"this is post method "})
+    def patch(self,request):
+        return Response({'message':"this is patch method "})
+    def delete(self,request):
+        return Response({'message':"this is delete method "})
+
