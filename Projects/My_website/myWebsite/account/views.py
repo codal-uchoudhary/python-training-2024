@@ -4,7 +4,6 @@ from django.contrib import messages
 # Create your views here.
 
 def login(request):
-    print("login called ______________")
     if request.method=='POST':
         username=request.POST["username"]
         password = request.POST["password"]
