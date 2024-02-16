@@ -28,37 +28,19 @@ def createBlog(request):
         tag = request.POST['tag']
         image = request.POST['file']
 
-       
+        id  = request.user.id
         if request.user.is_authenticated:
-
-            first_name = request.user.first_name
-            last_name = request.user.last_name
-            email = request.user.email
-            author=None
-
-            author_exists=  Author.objects.get(email=email)
-            if author_exists:
-                author = author_exists
-            else:
-                first_name = request.user.first_name
-                last_name = request.user.last_name
-                email = request.user.email
-                auth = Author(first_name = first_name,last_name=last_name,email = email)
-                auth.save()
-                author = auth
-            
+            author, created =  Author.objects.get_or_create(user=request.user)
             blog = Post(title=title,excerpt=excerpt,content=content,slug=title,image_name=image, author=author)
             blog.save()
             messages.success(request, "Blog is posted Sucessfuly")
             return render(request,'blog/createBlog.html')
-
-
         else:
             messages.success(request, "Please Login")
             return render(request,'blog/createBlog.html')
-
     else:
         return render(request,'blog/createBlog.html')
+
    
 
 class PostApi(APIView):
@@ -66,10 +48,26 @@ class PostApi(APIView):
         data = Post.objects.all()
         serializerData = blogSerializer(data,many=True)
         return Response(serializerData.data)
+    
     def post(self,request):
-        return Response({'message':"this is post method "})
+        data = request.data
+        serializer = blogSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
+    
     def patch(self,request):
-        return Response({'message':"this is patch method "})
+        data = request.data
+        serializer = blogSerializer(data = data,partial=True)
+        if serializer.is_valid():
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+
     def delete(self,request):
-        return Response({'message':"this is delete method "})
+        data = request.data
+        obj = Post.objects.get(id=data['id'])
+        obj.delete()
+        return Response({'message':"data is deleted"})
 

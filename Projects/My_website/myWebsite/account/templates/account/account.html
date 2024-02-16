@@ -1,0 +1,63 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block title%}Account page{%endblock%}
+
+{% block css_file%}
+<link rel="stylesheet" href={% static "account/account.css" %}>
+{%endblock%}
+
+{%block content%}
+
+<div class="container d-flex justify-content-center align-items-center">
+             
+    <div class="card">
+
+     <div class="upper">
+
+       <img src="https://i.imgur.com/Qtrsrk5.jpg" class="img-fluid">
+       
+     </div>
+
+     <div class="user text-center">
+
+       <div class="profile">
+
+         <img src="https://i.imgur.com/JgYD2nQ.jpg" class="rounded-circle" width="80">
+         
+       </div>
+
+     </div>
+
+
+     <div class="contentBody">
+        <div class="upperContent">
+            <div class="username">{{user.first_name}}</div>
+            <div class="country">Country</div>
+            <ul class="list"><li><a class="logout" href={% url "logout" %}>Logout</a></li></ul>
+            
+        </div>
+
+       <div class="content">
+
+         <div class="stats">
+           <h5 class="mb-0">Followers</h5>
+           <span>8,797</span>
+         </div>
+         <div class="stats">
+           <h5 class="mb-0">Projects</h5>
+           <span>142</span>
+         </div>
+         <div class="stats">
+           <h5 class="mb-0">Ranks</h5>
+           <span>129</span>
+
+         </div>
+       </div>
+     </div>
+    </div>
+  </div>
+
+
+{%endblock%}
+   
