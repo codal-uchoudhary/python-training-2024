@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+
+
+
+       .container{
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #71b7e6, #9b59b6);
+       }
+
+       .card{
+        width: 380px;
+        border: none;
+        border-radius: 15px;
+        padding: 8px;
+        background-color: #fff;
+        position: relative;
+        height: 400px;
+       }
+
+       .upper{
+
+        height: 100px;
+
+       }
+
+       .upper img{
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+       }
+
+       .user{
+        position: relative;
+       }
+
+       .profile img{
+        height: 80px;
+        width: 80px;
+        margin-top:3px;
+        margin-left: 2px;
+        border-radius: 100px;       
+       }
+
+       .profile{
+        position: absolute;
+        top:-50px;
+        left: 38%;
+        height: 90px;
+        width: 90px;
+        border:3px solid #f7eded;
+        border-radius: 50%;
+       }
+.list{
+       list-style-type: none;
+}
+       .logout{
+        border-radius: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 35px;
+        border: 2px solid black;
+        width: 40%;
+        margin-left: 30%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        font-size: 17px;
+        color: black;
+        list-style-type: none;
+       }
+       
+       .upperContent{
+        background-color: #ffffff;
+       }
+      
+       .username{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 50px;
+       }
+       .country{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 10px;
+       }
+
+.content{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 80px;
+    margin-top: 0px;
+}
+       .stats span{
+        font-size: 22px;
+       }

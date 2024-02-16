@@ -4,17 +4,30 @@ from django.contrib import messages
 # Create your views here.
 
 def login(request):
+    print("login called ______________")
     if request.method=='POST':
         username=request.POST["username"]
         password = request.POST["password"]
         user = auth.authenticate(username=username,password=password)
-        if user:
+        if user is not None:
             auth.login(request,user)
             return redirect('/')
         else :
+            print("invalid credential")
             return render(request,'account/login.html')
-            
     return render(request,'account/login.html')
+
+
+def account(request):
+    if request.user.is_authenticated :
+        return render(request,'account/account.html')
+    else:
+        return redirect('/account/login')
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
 
 def signup(request):
     if request.method == 'POST':
