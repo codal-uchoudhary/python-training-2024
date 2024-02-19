@@ -72,3 +72,15 @@ body {
     padding: 0.5rem 1rem;
     border-radius: 8px;
   }
+  .postnav{
+    list-style-type: none;
+    color: white;
+    display: flex;
+    gap: 20px;
+  }
+  .postnav li{
+    color: white;
+  }
+  .postnav li:hover{
+    color:red;
+  }
