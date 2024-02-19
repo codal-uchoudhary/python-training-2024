@@ -17,10 +17,16 @@
         <span class="tag">{{i.caption}}</span>
 
         {% endfor %}
+        <ul class="postnav">
+            <li>Update</li>
+            <li>Delete</li>
+            <li>BookMark</li>
+            <li>Read later</li>
+        </ul>
     </div>
     <article>
         <img src="{% static "blog/images/img1.jpg" %}" alt="this post img">
-        <address><a href="mailto:{{ post.author.email }}">{{post.author}}</a></address>
+        <address><a href="mailto:{{ post.author.email }}">{{author.first_name}} {{author.last_name}}</a></address>
         <div>
             Last update on <time>{{post.date|date:"d M Y" }}</time>
         </div>

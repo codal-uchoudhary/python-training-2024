@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth.models import User,auth
 from datetime import date
 from . models import Post,Author
 from django.contrib import messages
@@ -16,9 +17,10 @@ def posts(request):
     return render(request,'blog/allPost.html',{"posts":all_posts})
 
 def postDetail(request,slug):
-    iPost = Post.objects.all().get(slug = slug)
-    
-    return render(request,"blog/postDetail.html",{'post':iPost,"post_tag":iPost.tags.all()})
+    iPost = Post.objects.get(slug = slug)
+    author_id = iPost.author_id
+    author = Author.objects.get(id =author_id).user
+    return render(request,"blog/postDetail.html",{'post':iPost,"post_tag":iPost.tags.all(),'author':author})
 
 def createBlog(request):
     if request.method== 'POST':
@@ -34,14 +36,12 @@ def createBlog(request):
             blog = Post(title=title,excerpt=excerpt,content=content,slug=title,image_name=image, author=author)
             blog.save()
             messages.success(request, "Blog is posted Sucessfuly")
-            return render(request,'blog/createBlog.html')
+            return redirect('/posts')
         else:
             messages.success(request, "Please Login")
             return render(request,'blog/createBlog.html')
     else:
         return render(request,'blog/createBlog.html')
-
-   
 
 class PostApi(APIView):
     def get(self,request):
