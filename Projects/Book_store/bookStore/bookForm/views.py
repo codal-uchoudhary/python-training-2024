@@ -2,19 +2,65 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import *
 
 from .models import Users 
 
 # Create your views here.
 
-def form(request):
-    if request.method == 'POST':
-        name = request.POST['uname']
-        newUser = Users(username=name)
-        newUser.save()
-        return HttpResponseRedirect("form/users")
+# def form(request):
+#     if request.method == 'POST':
+#         name = request.POST['uname']
+#         age = request.POST['age']
+#         newUser = Users(username=name,age=age)
+#         newUser.save()
+#         return HttpResponseRedirect("form/users")
 
-    return render(request,"bookForm/form.html")
+#     return render(request,"bookForm/form.html")
+
+class form(APIView):
+
+    def get(self,request):
+        obj = Users.objects.all()
+        serializer = userSeriallizers(obj,many=True)
+        return Response(serializer.data)
+        
+    def post(self,request):
+        data = request.data
+        serializers = userSeriallizers(data=data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        else:
+            return Response(serializers.errors)
+    
+
+    def put(self,request):
+        data = request.data
+        serializers = userSeriallizers(data=data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        else:
+            return Response(serializers.errors)
+    def patch(self,request):
+        data = request.data
+        obj = Users.objects.get(id=data['id'])
+        serializers = userSeriallizers(obj,data=data,partial=True)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data)
+        else:
+            return Response(serializers.errors)
+    def delete(self,request):
+        data = request.data
+        obj = Users.objects.get(id=data['id'])
+        obj.delete()
+        return Response({'message':"item is deleted"})
+
+
 
 def registration(request):
     if request.method == 'POST':
