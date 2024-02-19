@@ -17,7 +17,7 @@ def posts(request):
     return render(request,'blog/allPost.html',{"posts":all_posts})
 
 def postDetail(request,slug):
-    iPost = Post.objects.all().get(slug = slug)
+    iPost = Post.objects.get(slug = slug)
     author_id = iPost.author_id
     author = Author.objects.get(id =author_id).user
     return render(request,"blog/postDetail.html",{'post':iPost,"post_tag":iPost.tags.all(),'author':author})
