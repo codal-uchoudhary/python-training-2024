@@ -23,8 +23,8 @@
     <body>
        <form method="POST">
        {% csrf_token %}
-        <lable for="name">dummy form</lable> 
-        <input id="name" name="uname" type="text"> 
+        <input id="name" name="name" type="text" placeholder="Name">
+        <input id="age" name="age" type="number" placeholder ="age"> 
         <button type="submit ">send</button>
        </form>
     </body>
