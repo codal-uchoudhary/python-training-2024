@@ -1,49 +1,39 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.models import User,auth
+from django.contrib.auth import authenticate
 from django.contrib import messages
+from rest_framework.views import APIView 
+from .serializers import *
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+
 # Create your views here.
 
-def login(request):
-    if request.method=='POST':
-        username=request.POST["username"]
-        password = request.POST["password"]
-        user = auth.authenticate(username=username,password=password)
-        if user is not None:
-            auth.login(request,user)
-            return redirect('/')
-        else :
-            print("invalid credential")
-            return render(request,'account/login.html')
-    return render(request,'account/login.html')
-
-
-def account(request):
-    if request.user.is_authenticated :
-        return render(request,'account/account.html')
-    else:
-        return redirect('/account/login')
-
-
-def logout(request):
-    auth.logout(request)
-    return redirect('/')
-
-def signup(request):
-    if request.method == 'POST':
-        first_name = request.POST["first_name"].lower()
-        last_name=request.POST["last_name"].lower()
-        email = request.POST["email"].lower()
-        username=request.POST["username"]
-        password = request.POST["password"]
-        password2 = request.POST["c_password"]
-
-        if User.objects.filter(email=email).exists():
-            messages.info(request,'User alredy exists')
-        elif password != password2:
-             messages.info(request,'password does not match')
+class RegisterAPI(APIView):
+    
+    def post(self,request):
+        data = request.data
+        serializers = RegisterSerializers(data = data)
+        if not serializers.is_valid():
+            return Response({
+                'status':False,
+                'messages':serializers.errors
+            })
         else:
-            user = User.objects.create_user(username=username,password=password,first_name=first_name,last_name=last_name,email=email)
-            user.save()
-            return redirect('/account')
-    else:
-        return render(request,'account/signup.html')
+            serializers.save()
+            return Response({'status':True,'message':"user is created"})
+
+class LoginApi(APIView):
+    def post(self,request):
+        data = request.data
+        serializers = LoginSerializers(data=data)
+        if not serializers.is_valid():
+            return Response({
+                'status':False,
+                'message':serializers.errors
+            })
+        else:
+            user = authenticate(username = serializers.data['username'],password = serializers.data['password'])
+            if not user:
+                return Response({'message':"user is not found"})
+            token = Token.objects.get_or_create(user=user)
+            return Response({'status':True,'message':"user is loged", 'token':str(token)})

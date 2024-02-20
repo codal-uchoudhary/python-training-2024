@@ -1,10 +1,13 @@
-from django.urls import path
-
+from django.urls import path,include
+from rest_framework.routers import DefaultRouter
 from . import views 
 
+
+router = DefaultRouter()
+router.register(r'blog',views.crudBlogApi)
+urlpatterns = router.urls
+
+
 urlpatterns = [
-    path("",views.startingPage,name="startingPage"),
-    path("posts",views.posts,name="posts"),
-    path("create",views.createBlog,name="createBlogPage"),
-    path("posts/<slug>",views.postDetail,name="postDetail")
+    path("",include(router.urls))
 ]
