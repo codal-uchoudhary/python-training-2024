@@ -36,4 +36,4 @@ class LoginApi(APIView):
             if not user:
                 return Response({'message':"user is not found"})
             token = Token.objects.get_or_create(user=user)
-            return Response({'status':True,'message':"user is loged", 'token':str(token)})
+            return Response({'status':True,'message':"user is loged", 'token':str(token),'first_name':user.first_name,'email':user.email})
