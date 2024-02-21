@@ -6,7 +6,10 @@ from rest_framework.response import Response
 from .serializers import blogSerializer
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny,IsAuthenticated
+from rest_framework.views import APIView
+
+
 
 
 
@@ -14,6 +17,4 @@ class crudBlogApi(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = blogSerializer
     authentication_classes = [TokenAuthentication]
-    
-
-   
+    permission_classes = [IsAuthenticated]
