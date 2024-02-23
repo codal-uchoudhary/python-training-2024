@@ -3,11 +3,7 @@ from rest_framework.routers import DefaultRouter
 from . import views 
 
 
-router = DefaultRouter()
-router.register(r'blog',views.crudBlogApi)
-urlpatterns = router.urls
-
-
 urlpatterns = [
-    path("",include(router.urls))
+    path("",views.blog.as_view()),
+    path("myBlogs",views.userBlog.as_view())
 ]
