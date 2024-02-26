@@ -28,7 +28,7 @@ class userBlog(APIView):
 
     def get_item(self,slug):
         try:
-            item = Post.objects.get(slug=slug)
+            item = Post.objects.get(id=slug)
             return item
         except:
             return False
@@ -39,7 +39,7 @@ class userBlog(APIView):
         return Response(serializers.data)
     
     def post(self,request):
-        data = request.data
+        data= request.data
         data['author']=request.user.id
         serializers = blogSerializer(data=data)
         if serializers.is_valid():
@@ -48,35 +48,34 @@ class userBlog(APIView):
         return Response(serializers.errors)
     
     def put(self,request,slug):
-        data = request.data
-        if data['author'] != request.user.id:
+        obj = self.get_item(slug=slug)
+        if obj==False: return Response({'message':"please enter valid blog-slug"})
+        if obj.author.id != request.user.id:
             return Response({'message':"You are not authorised to perform this action"})
-        obj = self.get_item(slug)
-        if obj==False : return Response({'message':"invalid blog-slug"})
-        serializer = blogSerializer(obj,data=data)
+        serializer = blogSerializer(obj,data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
+
     
     def patch(self,request,slug):   
-        data = request.data
-        if data['author'] != request.user.id:
+        obj = self.get_item(slug=slug)
+        if obj==False: return Response({'message':"please enter valid blog-slug"})
+        if obj.author.id != request.user.id:
             return Response({'message':"You are not authorised to perform this action"})
-        obj = self.get_item(slug)
         if obj==False : return Response({'message':"invalid blog-slug"})
-        serializer = blogSerializer(obj,data=data,partial=True)
+        serializer = blogSerializer(obj,data=request.data,partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
  
     def delete(self,request,slug):
-        data = request.data
-        if data['author']!=request.user.id :
-            return Response({'message':'You are not authorised to perform this action'})
-        obj = self.get_item(slug)
-        if obj==False : return Response({'message':"invalid blog-slug"})
+        obj = self.get_item(slug=slug)
+        if obj==False: return Response({'message':"please enter valid blog-slug"})
+        if obj.author.id != request.user.id:
+            return Response({'message':"You are not authorised to perform this action"})
         obj.delete()
         return Response({'message':"blog deleted"})
     
