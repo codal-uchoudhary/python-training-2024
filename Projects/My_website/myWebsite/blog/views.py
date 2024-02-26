@@ -27,10 +27,10 @@ class userBlog(APIView):
     permission_classes = [IsAuthenticated]
 
     def get_item(self,slug):
-        item = Post.objects.get(slug=slug)
-        if item:
+        try:
+            item = Post.objects.get(slug=slug)
             return item
-        else:
+        except:
             return False
         
     def get(self,request):
@@ -50,9 +50,9 @@ class userBlog(APIView):
     def put(self,request,slug):
         data = request.data
         if data['author'] != request.user.id:
-            return Response({'message':"you are not valid author"})
+            return Response({'message':"You are not authorised to perform this action"})
         obj = self.get_item(slug)
-        if obj==False : return Response({'message':"in valid slug"})
+        if obj==False : return Response({'message':"invalid blog-slug"})
         serializer = blogSerializer(obj,data=data)
         if serializer.is_valid():
             serializer.save()
@@ -62,9 +62,9 @@ class userBlog(APIView):
     def patch(self,request,slug):   
         data = request.data
         if data['author'] != request.user.id:
-            return Response({'message':"you are not valid author"})
+            return Response({'message':"You are not authorised to perform this action"})
         obj = self.get_item(slug)
-        if obj==False : return Response({'message':"in valid slug"})
+        if obj==False : return Response({'message':"invalid blog-slug"})
         serializer = blogSerializer(obj,data=data,partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -74,9 +74,9 @@ class userBlog(APIView):
     def delete(self,request,slug):
         data = request.data
         if data['author']!=request.user.id :
-            return Response({'message':'you are not valid author'})
+            return Response({'message':'You are not authorised to perform this action'})
         obj = self.get_item(slug)
-        if obj==False : return Response({'message':"in valid slug"})
+        if obj==False : return Response({'message':"invalid blog-slug"})
         obj.delete()
         return Response({'message':"blog deleted"})
     
