@@ -7,21 +7,22 @@ from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework.views import APIView
+from rest_framework.pagination import LimitOffsetPagination
 
 
 
-
-
-class blog(APIView):
+class blog(APIView,LimitOffsetPagination):
     permission_classes = [AllowAny]
 
     def get(self,request):
         posts = Post.objects.all()
-        serializers = blogSerializer(posts,many=True)
+        paginator = LimitOffsetPagination()
+        result_page = paginator.paginate_queryset(posts, request)
+        serializers = blogSerializer(result_page, many=True, context={'request':request})
         return Response(serializers.data)
 
     
-class userBlog(APIView):
+class userBlog(APIView,LimitOffsetPagination):
 
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -35,8 +36,11 @@ class userBlog(APIView):
         
     def get(self,request):
         posts = Post.objects.filter(author=request.user.id)
-        serializers = blogSerializer(posts,many=True)
+        paginator = LimitOffsetPagination()
+        result_page = paginator.paginate_queryset(posts, request)
+        serializers = blogSerializer(result_page, many=True, context={'request':request})
         return Response(serializers.data)
+
     
     def post(self,request):
         data= request.data
