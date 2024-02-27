@@ -31,4 +31,6 @@ class LoginSerializers(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
 
-    
+class ChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required = True)
