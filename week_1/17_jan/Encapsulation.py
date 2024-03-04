@@ -1,4 +1,3 @@
-
 # incapsulation : encapsulation  allow us to hide or protect our class members
 
 # incapsulation do not provide direct access to data members
@@ -12,23 +11,22 @@
 # 3> public :- those members which can be accesses from any where within the file
 
 
-
 class maths:
-
     def __init__(self):
         self.num1 = 10
         self.num2 = 20
 
-    def add(self,x,y):
-        return x+y
+    def add(self, x, y):
+        return x + y
+
 
 class base(maths):
-    def __init__(self,x,y):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
 
     def plus(self):
-        return self.add(self.x,self.y)
+        return self.add(self.x, self.y)
 
     def get_nums(self):
         maths.__init__(self)
@@ -36,10 +34,7 @@ class base(maths):
         return self.num2
 
 
-obj_base = base(1,2)
+obj_base = base(1, 2)
 
 print(obj_base.plus())
 print(obj_base.get_nums())
-
-
-

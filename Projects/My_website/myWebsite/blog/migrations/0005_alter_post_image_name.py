@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('blog', '0004_remove_author_email_remove_author_first_name_and_more'),
+        ("blog", "0004_remove_author_email_remove_author_first_name_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='image_name',
-            field=models.ImageField(null=True, upload_to='static/blog/'),
+            model_name="post",
+            name="image_name",
+            field=models.ImageField(null=True, upload_to="static/blog/"),
         ),
     ]

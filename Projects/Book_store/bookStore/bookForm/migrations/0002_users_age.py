@@ -4,16 +4,15 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bookForm', '0001_initial'),
+        ("bookForm", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='users',
-            name='age',
-            field=models.IntegerField(null='True'),
-            preserve_default='True',
+            model_name="users",
+            name="age",
+            field=models.IntegerField(null="True"),
+            preserve_default="True",
         ),
     ]

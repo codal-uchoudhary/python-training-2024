@@ -5,15 +5,19 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bookOutlet', '0008_author_alter_book_author'),
+        ("bookOutlet", "0008_author_alter_book_author"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='book',
-            name='author',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='books', to='bookOutlet.author'),
+            model_name="book",
+            name="author",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="books",
+                to="bookOutlet.author",
+            ),
         ),
     ]

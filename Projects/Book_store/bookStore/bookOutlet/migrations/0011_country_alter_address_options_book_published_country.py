@@ -4,26 +4,33 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bookOutlet', '0010_address_author_address'),
+        ("bookOutlet", "0010_address_author_address"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Country',
+            name="Country",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50)),
             ],
         ),
         migrations.AlterModelOptions(
-            name='address',
-            options={'verbose_name_plural': 'Address Entries'},
+            name="address",
+            options={"verbose_name_plural": "Address Entries"},
         ),
         migrations.AddField(
-            model_name='book',
-            name='published_country',
-            field=models.ManyToManyField(to='bookOutlet.country'),
+            model_name="book",
+            name="published_country",
+            field=models.ManyToManyField(to="bookOutlet.country"),
         ),
     ]

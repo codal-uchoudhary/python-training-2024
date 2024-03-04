@@ -5,23 +5,34 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bookOutlet', '0009_alter_book_author'),
+        ("bookOutlet", "0009_alter_book_author"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Address',
+            name="Address",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('country', models.CharField(max_length=50)),
-                ('state', models.CharField(max_length=50)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("country", models.CharField(max_length=50)),
+                ("state", models.CharField(max_length=50)),
             ],
         ),
         migrations.AddField(
-            model_name='author',
-            name='address',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to='bookOutlet.address'),
+            model_name="author",
+            name="address",
+            field=models.OneToOneField(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="bookOutlet.address",
+            ),
         ),
     ]

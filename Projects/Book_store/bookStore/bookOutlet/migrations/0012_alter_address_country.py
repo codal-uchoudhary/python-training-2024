@@ -5,15 +5,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bookOutlet', '0011_country_alter_address_options_book_published_country'),
+        ("bookOutlet", "0011_country_alter_address_options_book_published_country"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='address',
-            name='country',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='bookOutlet.country'),
+            model_name="address",
+            name="country",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="bookOutlet.country",
+            ),
         ),
     ]
