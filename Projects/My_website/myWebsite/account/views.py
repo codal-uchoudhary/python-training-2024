@@ -85,9 +85,6 @@ class ForgotPassword(APIView):
 
 class ResetForgotedPassword(APIView):
     def post(self,request,token):
-        if request.data['password']!=request.data['password_conform']:
-            return Response({'message':"password does not match"})
-        
         obj = Profile.objects.get(forget_password_token=token)
         user = obj.user
         serializer = ResetPasswordSerializer(data = request.data)

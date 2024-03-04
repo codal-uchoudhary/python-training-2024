@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'account',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,6 +76,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myWebsite.wsgi.application'
 
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+  'http://localhost:8000',
+)
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
