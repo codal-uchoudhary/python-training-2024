@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('bookOutlet', '0005_book_price'),
+        ("bookOutlet", "0005_book_price"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='book',
-            name='price',
+            model_name="book",
+            name="price",
             field=models.DecimalField(decimal_places=2, max_digits=10),
         ),
     ]

@@ -4,11 +4,11 @@ from collections import OrderedDict
 
 myDict = OrderedDict()
 
-myDict[1]=100
-myDict[2]=200
-myDict[3]=300
-myDict[4]=400
-myDict[5]=500
+myDict[1] = 100
+myDict[2] = 200
+myDict[3] = 300
+myDict[4] = 400
+myDict[5] = 500
 
 for i in myDict.items():
     print(i)
@@ -21,7 +21,7 @@ for i in myDict.items():
 
 print(type(myDict))
 
-demo=  {1:10,2:20,3:30}
+demo = {1: 10, 2: 20, 3: 30}
 
 demo = OrderedDict(demo)
 

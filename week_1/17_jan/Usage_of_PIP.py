@@ -1,4 +1,3 @@
-
 # what is pip: pip is package manager for python packages
 
 # command to check pip Install or not: // pip --version
@@ -19,5 +18,3 @@ c = camelcase.CamelCase()
 txt = "helloworld"
 
 print(c.hump(txt))
-
-

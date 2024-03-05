@@ -1,4 +1,4 @@
-import psycopg2    # import module
+import psycopg2  # import module
 
 """
 what is psycopg2 : it acts as a bridge between python and postgreSQL database. that allows 
@@ -11,6 +11,7 @@ psycopg2 is postgreSQL adapter for python programming language.
 
 # connect database
 
+
 def get_connection():
     try:
         return psycopg2.connect(
@@ -18,9 +19,11 @@ def get_connection():
             user="postgres",
             password="ummed",
             host="localhost",
-            port=5432,)
+            port=5432,
+        )
     except:
         return False
+
 
 conn = get_connection()
 
@@ -32,9 +35,7 @@ else:
     print("something went wrong")
 
 
-
 #  ____________actual work on databse________________
 
 
 conn.close()  # close the database
-

@@ -8,19 +8,21 @@ cursor = conn.cursor()
 
 # create table
 
-cursor.execute("""CREATE TABLE IF NOT EXISTS person(
+cursor.execute(
+    """CREATE TABLE IF NOT EXISTS person(
 id INT PRIMARY KEY,
 name VARCHAR(225),
 country VARCHAR(225),
 gender VARCHAR(225),
 age INT
-)""")
-
+)"""
+)
 
 
 # insert data
 
-cursor.execute("""INSERT INTO person(id,name,country,gender,age) VALUES
+cursor.execute(
+    """INSERT INTO person(id,name,country,gender,age) VALUES
 (1,'ummed','India','male',20),
 (2,'leesa','usa','female',22),
 (3,'manoj','India','male',30),
@@ -29,18 +31,19 @@ cursor.execute("""INSERT INTO person(id,name,country,gender,age) VALUES
 (6,'seema','usa','female',40),
 (7,'jamna','India','female',55),
 (8,'suki','India','male',30)
-""")
+"""
+)
 
 # select all data from table
 
 cursor.execute("SELECT * FROM person")
 dataList = cursor.fetchall()
 
-for i in dataList:   # print all the rows
+for i in dataList:  # print all the rows
     print(i)
 
 
-#______________________________ read data_______________________________
+# ______________________________ read data_______________________________
 
 # select specific column_
 
@@ -134,7 +137,6 @@ for i in cursor.fetchall():
 # count
 
 
-
 print("______ return the total rows______")
 cursor.execute("SELECT COUNT(*) FROM person")
 
@@ -184,15 +186,15 @@ for i in cursor.fetchall():
 # having keyword
 
 print("______countries with count of countries >1 ______")
-cursor.execute("SELECT COUNT(*),country  FROM person GROUP BY country HAVING COUNT(*)>1")
+cursor.execute(
+    "SELECT COUNT(*),country  FROM person GROUP BY country HAVING COUNT(*)>1"
+)
 
 for i in cursor.fetchall():
     print(i)
 
 
-
-
-#_______________________________update data__________________________________
+# _______________________________update data__________________________________
 
 # update single row
 
@@ -202,7 +204,7 @@ cursor.execute("UPDATE person SET country = 'IRAN' WHERE country = 'usa'")
 cursor.execute("select * from person")
 
 for i in cursor.fetchall():
-   print(i)
+    print(i)
 
 
 # update multiple coumns
@@ -277,7 +279,7 @@ for i in cursor.fetchall():
     print(i)
 
 
-#____________________________ delete opration________________________________
+# ____________________________ delete opration________________________________
 
 #  delete single row
 
@@ -317,7 +319,7 @@ cursor.execute("CREATE TABLE cars(id INT,modal VARCHAR(225))")
 
 
 cursor.execute("INSERT INTO cars(id,modal) VALUES(1,'m1'),(2,'m2'),(3,'m3')")
-cursor.execute('SELECT * FROM cars')
+cursor.execute("SELECT * FROM cars")
 
 print("____cars table_____")
 for i in cursor.fetchall():
@@ -326,17 +328,16 @@ for i in cursor.fetchall():
 cursor.execute("DELETE FROM cars")
 
 print("___all the rows in the cars are deleted____")
-cursor.execute('SELECT * FROM cars')
+cursor.execute("SELECT * FROM cars")
 
 for i in cursor.fetchall():
     print(i)
 
 
-
 # truncate will empty our table
 
 cursor.execute("INSERT INTO cars(id,modal) VALUES(3,'m1'),(4,'m2'),(5,'m3')")
-cursor.execute('SELECT * FROM cars')
+cursor.execute("SELECT * FROM cars")
 
 print("____new cars table_____")
 for i in cursor.fetchall():
@@ -345,12 +346,10 @@ for i in cursor.fetchall():
 cursor.execute("truncate table cars")
 
 print("___cars table is trucncated ____")
-cursor.execute('SELECT * FROM cars')
+cursor.execute("SELECT * FROM cars")
 
 for i in cursor.fetchall():
     print(i)
-
-
 
 
 #  delete table
@@ -363,6 +362,4 @@ cursor.execute("DROP TABLE cars")
 # cursor.execute('SELECT * FROM cars')  //  this will give error
 
 
-
 conn.commit()
-

@@ -6,33 +6,36 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('blog', '0003_alter_post_image_name'),
+        ("blog", "0003_alter_post_image_name"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='author',
-            name='email',
+            model_name="author",
+            name="email",
         ),
         migrations.RemoveField(
-            model_name='author',
-            name='first_name',
+            model_name="author",
+            name="first_name",
         ),
         migrations.RemoveField(
-            model_name='author',
-            name='last_name',
+            model_name="author",
+            name="last_name",
         ),
         migrations.AddField(
-            model_name='author',
-            name='bio',
+            model_name="author",
+            name="bio",
             field=models.CharField(max_length=200, null=True),
         ),
         migrations.AddField(
-            model_name='author',
-            name='user',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="author",
+            name="user",
+            field=models.OneToOneField(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

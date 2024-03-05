@@ -4,7 +4,7 @@ import json
 
 # convertion of python data into a json data
 
-a = {1:'one',2:'two',3:'three'}
+a = {1: "one", 2: "two", 3: "three"}
 
 print(type(a))
 
@@ -29,29 +29,29 @@ None                 null
 
 
 x = {
-    1:'one',
-    2:2,
-    3:True,
-    4:[1,2,3,4],
-    5:(1,2,3,4),
-    6:"this is line ",
-    7:{'one':1,'two':2}
+    1: "one",
+    2: 2,
+    3: True,
+    4: [1, 2, 3, 4],
+    5: (1, 2, 3, 4),
+    6: "this is line ",
+    7: {"one": 1, "two": 2},
 }
 
 y = json.dumps(x)
 print(y)
 
 
-#_____________________________format the result______________________________
+# _____________________________format the result______________________________
 
-z = json.dumps(x,indent=5)
+z = json.dumps(x, indent=5)
 print(z)
 
-a = json.dumps(x,indent=4,separators=('.','='))
+a = json.dumps(x, indent=4, separators=(".", "="))
 print(a)
 
 
-b = json.dumps(x,indent=5,sort_keys=True)
+b = json.dumps(x, indent=5, sort_keys=True)
 
 print(b)
 
@@ -60,25 +60,22 @@ print(b)
 
 # open json file
 
-data = open('data1.json')
+data = open("data1.json")
 
 newData = json.load(data)
 
 print(newData)
 print(type(newData))
 
-print(newData['fruit'])
+print(newData["fruit"])
 
 
+# __________________________create a write json file_____________________________
 
-#__________________________create a write json file_____________________________
-
-dict1 = {1:'one',2:'two'}
+dict1 = {1: "one", 2: "two"}
 
 dict1 = json.dumps(dict1)
 
-file = open('data3.json','w')
+file = open("data3.json", "w")
 file.write(dict1)
 file.close()
-
-

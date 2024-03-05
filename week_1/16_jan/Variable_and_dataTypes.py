@@ -13,24 +13,23 @@ vatiable name:
 
 """
 
-x = 100   #  here x is variable and 100 is value that assign to x
+x = 100  #  here x is variable and 100 is value that assign to x
 
-s1 = 'ummed'
+s1 = "ummed"
 s2 = "choudhary"
 s3 = """hello my 
         name is ummed"""
 
-print(s1+s2)
-print(s1,s2)
+print(s1 + s2)
+print(s1, s2)
 
-s4 = s1+s2;
+s4 = s1 + s2
 print(s4)
 
 # get the data type
 print(type(10))
-print(type('ummed'))
+print(type("ummed"))
 print(type(True))
-
 
 
 # casting
@@ -50,7 +49,7 @@ print(type(b))
 b = float(b)
 print(type(b))
 
-ls = [1,2,3]
+ls = [1, 2, 3]
 print(type(ls))
 tup = tuple(ls)
 print(type(ls))
@@ -65,77 +64,71 @@ else:
     print("both are diffrent")
 
 
-
-
 # one to multi variable
 
-a=b=c=100
+a = b = c = 100
 
 print(a)
 print(b)
 print(c)
 
 # many to many
-x,y,z = 1,2,3
+x, y, z = 1, 2, 3
 
-print(x,y,z)
-
+print(x, y, z)
 
 
 # global variable: variable which not declared inside any function
 
 zc = 100  # global variable
 
+
 def func():
     zc = 20  # local variable
     print(zc)
 
-print(zc) # output will be 100
+
+print(zc)  # output will be 100
 
 
 var = "local"
-def func1():
 
-    global var   # access of global variable inside a function
+
+def func1():
+    global var  # access of global variable inside a function
     var = "global"
+
 
 func1()
 print(var)
 
 
+# _____________________________dataTypes_________________________________
 
-#_____________________________dataTypes_________________________________
-
-x = 100                # int
+x = 100  # int
 print(type(x))
-x = 10.5               # float
+x = 10.5  # float
 print(type(x))
-x = 'ummed'            # string
+x = "ummed"  # string
 print(type(x))
-x = 10j                # complex
+x = 10j  # complex
 print(type(x))
-x = True               # bool
+x = True  # bool
 print(type(x))
-x = False              # bool
+x = False  # bool
 print(type(x))
-x = [1,2,3]            # list
+x = [1, 2, 3]  # list
 print(type(x))
-x = (1,2,3)            # tuple
+x = (1, 2, 3)  # tuple
 print(type(x))
-x = {1,2,3}            # set
+x = {1, 2, 3}  # set
 print(type(x))
-x = {'1':'100'}        # dictionaxry
+x = {"1": "100"}  # dictionaxry
 print(type(x))
-x = range(10)          # range
-print(type(x))
-
-x = None               # none
-print(type(x))
-x = bytearray(5)        # bytearray
+x = range(10)  # range
 print(type(x))
 
-
-
-
-
-
+x = None  # none
+print(type(x))
+x = bytearray(5)  # bytearray
+print(type(x))
