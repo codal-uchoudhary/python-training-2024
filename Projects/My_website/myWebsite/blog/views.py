@@ -8,22 +8,19 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.decorators import action
 
 
-class blog(APIView, LimitOffsetPagination):
+class blog(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = blogSerializer
     permission_classes = [AllowAny]
-
-    def get(self, request):
-        posts = Post.objects.all()
-        paginator = LimitOffsetPagination()
-        result_page = paginator.paginate_queryset(posts, request)
-        serializers = blogSerializer(
-            result_page, many=True, context={"request": request}
-        )
-        return Response(serializers.data)
+    http_method_names = ["get"]
 
 
-class userBlog(APIView, LimitOffsetPagination):
+class myBlog(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = blogSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -34,40 +31,22 @@ class userBlog(APIView, LimitOffsetPagination):
         except:
             return False
 
-    def get(self, request):
-        posts = Post.objects.filter(author=request.user.id)
-        paginator = LimitOffsetPagination()
-        result_page = paginator.paginate_queryset(posts, request)
-        serializers = blogSerializer(
-            result_page, many=True, context={"request": request}
-        )
-        return Response(serializers.data)
+    def get_queryset(self):
+        return Post.objects.filter(author=self.request.user.id)
 
-    def post(self, request):
-        data = request.data
-        data["author"] = request.user.id
-        serializers = blogSerializer(data=data)
-        if serializers.is_valid():
-            serializers.save()
-            return Response(serializers.data)
-        return Response(serializers.errors)
-
-    def put(self, request, id):
-        obj = self.get_item(id=id)
-        if not obj:
-            return Response({"message": "please enter valid blog-slug"})
+    def destroy(self, request, pk):
+        obj = self.get_item(id=pk)
+        if obj == False:
+            return Response({"message": "please enter valid blog id"})
         if obj.author.id != request.user.id:
             return Response(
                 {"message": "You are not authorised to perform this action"}
             )
-        serializer = blogSerializer(obj, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
+        obj.delete()
+        return Response({"message": "blog deleted"})
 
-    def patch(self, request, id):
-        obj = self.get_item(id=id)
+    def partial_update(self, request, pk):
+        obj = self.get_item(id=pk)
         if not obj:
             return Response({"message": "please enter valid blog-slug"})
         if obj.author.id != request.user.id:
@@ -81,14 +60,3 @@ class userBlog(APIView, LimitOffsetPagination):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
-
-    def delete(self, request, id):
-        obj = self.get_item(id=id)
-        if obj == False:
-            return Response({"message": "please enter valid blog id"})
-        if obj.author.id != request.user.id:
-            return Response(
-                {"message": "You are not authorised to perform this action"}
-            )
-        obj.delete()
-        return Response({"message": "blog deleted"})
