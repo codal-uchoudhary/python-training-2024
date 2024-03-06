@@ -1,15 +1,19 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from rest_framework.routers import DefaultRouter, SimpleRouter
 from . import views
 from rest_framework import routers
 
+router = routers.SimpleRouter()
+router.register(r"myblog", views.myBlog)
 
-router = routers.DefaultRouter()
-router.register(r"", views.myBlog)
+router2 = routers.SimpleRouter()
+router2.register(r"blog", views.blog)
 
-router2 = routers.DefaultRouter()
-router2.register(r"", views.blog)
+router_blog_app = routers.DefaultRouter()
+router_blog_app.extend(router)
+router_blog_app.extend(router2)
+
+
 urlpatterns = [
-    path("", include(router2.urls)),
-    path("myblog", include(router.urls)),
+    path("", include(router_blog_app.urls)),
 ]
