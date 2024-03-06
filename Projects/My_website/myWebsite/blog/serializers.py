@@ -16,7 +16,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 class blogSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True, read_only=True)
-    author = AuthorSerializer(read_only=True)
+    author = AuthorSerializer(required=False)
 
     class Meta:
         model = Post
@@ -31,3 +31,10 @@ class blogSerializer(serializers.ModelSerializer):
             "author",
             "tags",
         ]
+
+    def create(self, validated_data):
+        instance = super().create(validated_data)
+        instance.author = self.context.get("request").user
+        instance.tags.set(self.context.get("request").data["tags"])
+        instance.save()
+        return instance
