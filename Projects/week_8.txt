@@ -1,0 +1,19 @@
+4_march:
+- Create user-content Model and define many-to-many relation between user-content and Post Model (for bookmarck functionality).
+- create an API to add blog in the bookmark list
+- create an API to get bookmark blog
+
+5_march :
+-Update all the blog APIs from APIView class to ModelViewSet
+
+6_march :
+-Learned about pytest tool (class base testing and function based testing)
+-learned about Django inbuild signals(model based signals)
+-implement model based signals in blog project
+-learned about middleware in django
+
+7_march :
+-Learned fixtures ,mark,and parameterize in pytest
+-learned about REDIS( REmote DIctionary Server) special cache service
+-implement redis cache in the blog project
+

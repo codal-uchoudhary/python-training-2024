@@ -12,22 +12,18 @@ from rest_framework.decorators import action
 from django.core.cache import cache
 
 
-class blog(viewsets.ModelViewSet):
+class blog(viewsets.ReadOnlyModelViewSet):
     queryset = Post.objects.all()
     serializer_class = blogSerializer
     permission_classes = [AllowAny]
-    http_method_names = ["get"]
 
     def get_queryset(self):
-        if cache.get("posts"):
-            data = cache.get("posts")
-            print("_______________from cache________________________")
+        data = cache.get("posts", None)
+        if data:
             return data
-        else:
-            data = Post.objects.all()
-            cache.set("posts", data)
-            print("_________________data from the databasae_____________")
-            return data
+        data = Post.objects.all()
+        cache.set("posts", data)
+        return data
 
 
 class myBlog(viewsets.ModelViewSet):
