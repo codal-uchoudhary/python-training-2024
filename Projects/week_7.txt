@@ -1,0 +1,19 @@
+26_feb:
+-Logout API in blog project
+-Password Update API in blog project
+
+27_feb:
+- learned about paginantion 
+- implement LimitOffSet paginantion
+- django-backend filter module 
+
+28_feb:
+-nested serializer is implement in blog project
+-Implement forget password API (which send email to user to set new password)
+-implement API which reset password
+-setup email functionality to send email
+
+29_feb:
+-Validate incoming data using serializer
+- learned about CORS(cross-origin-resource-sharing)
+
