@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User, auth
-from .models import Post
+from .models import Post, Comments
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import blogSerializer
+from .serializers import blogSerializer, CommentSerializer
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -24,6 +24,13 @@ class blog(viewsets.ReadOnlyModelViewSet):
         data = Post.objects.all()
         cache.set("posts", data)
         return data
+
+
+class blogComments(APIView):
+    def get(self, request, id):
+        data = Comments.objects.filter(blog=id)
+        serializer = CommentSerializer(data, many=True)
+        return Response(serializer.data)
 
 
 class myBlog(viewsets.ModelViewSet):

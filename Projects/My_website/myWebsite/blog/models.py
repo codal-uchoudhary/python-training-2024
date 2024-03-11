@@ -23,3 +23,9 @@ class Post(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+
+class Comments(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.CharField(max_length=400)
+    blog = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
