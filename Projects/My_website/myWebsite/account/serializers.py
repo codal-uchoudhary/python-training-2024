@@ -2,7 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from blog.serializers import blogSerializer
 from .models import UserContent
-from .utils import StrongPasswordValidator
+from .utils import strong_password_validator
 
 
 class RegisterSerializers(serializers.Serializer):
@@ -26,8 +26,8 @@ class RegisterSerializers(serializers.Serializer):
                 raise serializers.ValidationError("email is exist")
 
         if data["password"]:
-            status, message = StrongPasswordValidator(data["password"])
-            if not status:
+            is_valid, message = strong_password_validator(data["password"])
+            if not is_valid:
                 raise serializers.ValidationError(message)
 
         return data
@@ -61,8 +61,8 @@ class ChangePasswordSerializer(serializers.Serializer):
             )
 
         if data["new_password"]:
-            status, message = StrongPasswordValidator(data["new_password"])
-            if not status:
+            is_valid, message = strong_password_validator(data["new_password"])
+            if not is_valid:
                 raise serializers.ValidationError(message)
 
         return data
@@ -81,8 +81,8 @@ class ResetPasswordSerializer(serializers.Serializer):
             return serializers.ValidationError("password is not matching")
 
         if data["password"]:
-            status, message = StrongPasswordValidator(data["password"])
-            if not status:
+            is_valid, message = strong_password_validator(data["password"])
+            if not is_valid:
                 raise serializers.ValidationError(message)
 
         return data

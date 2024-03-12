@@ -2,7 +2,7 @@ import re
 
 
 # function for validation of strong password
-def StrongPasswordValidator(password):
+def strong_password_validator(password):
     if len(password) < 8:
         message = "password should have atleast 8 char"
         return False, message
