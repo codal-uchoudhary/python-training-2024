@@ -7,8 +7,7 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register("all-blogs", views.blog)
 router.register("my-blogs", views.myBlog)
+router.register("blog-comments", views.blogComments)
+router.register("add-blog-comment", views.addComment)
 
-urlpatterns = [
-    path("", include(router.urls)),
-    path("blog-comments/<id>", views.blogComments.as_view()),
-]
+urlpatterns = [path("", include(router.urls))]

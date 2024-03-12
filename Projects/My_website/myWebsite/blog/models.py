@@ -28,4 +28,6 @@ class Post(models.Model):
 class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.CharField(max_length=400)
-    blog = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    blog = models.ForeignKey(
+        Post, null=True, on_delete=models.CASCADE, related_name="comments"
+    )
