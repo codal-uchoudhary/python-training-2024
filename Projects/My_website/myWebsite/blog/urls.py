@@ -10,4 +10,5 @@ router.register("my-blogs", views.myBlog)
 
 urlpatterns = [
     path("", include(router.urls)),
+    path("blog-comments/<id>", views.blogComments.as_view()),
 ]

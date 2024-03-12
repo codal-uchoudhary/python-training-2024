@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from blog.serializers import blogSerializer
 from .models import UserContent
+from .utils import strong_password_validator
 
 
 class RegisterSerializers(serializers.Serializer):
@@ -23,6 +24,11 @@ class RegisterSerializers(serializers.Serializer):
         if data["email"]:
             if User.objects.filter(email=data["email"]).exists():
                 raise serializers.ValidationError("email is exist")
+
+        if data["password"]:
+            is_valid, message = strong_password_validator(data["password"])
+            if not is_valid:
+                raise serializers.ValidationError(message)
 
         return data
 
@@ -50,11 +56,16 @@ class ChangePasswordSerializer(serializers.Serializer):
 
     def validate(self, data):
         if data["old_password"] == data["new_password"]:
-            return serializers.ValidationError(
+            raise serializers.ValidationError(
                 "new password is same as old password! choose diffeent password"
             )
-        else:
-            return data
+
+        if data["new_password"]:
+            is_valid, message = strong_password_validator(data["new_password"])
+            if not is_valid:
+                raise serializers.ValidationError(message)
+
+        return data
 
 
 class UsernameSerializer(serializers.Serializer):
@@ -66,10 +77,15 @@ class ResetPasswordSerializer(serializers.Serializer):
     password_confirm = serializers.CharField(required=True)
 
     def validate(self, data):
-        if data["password"] == data["password_confirm"]:
-            return data
-        else:
+        if not data["password"] == data["password_confirm"]:
             return serializers.ValidationError("password is not matching")
+
+        if data["password"]:
+            is_valid, message = strong_password_validator(data["password"])
+            if not is_valid:
+                raise serializers.ValidationError(message)
+
+        return data
 
 
 class GetBookmarkListSerializer(serializers.ModelSerializer):
