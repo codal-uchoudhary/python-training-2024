@@ -2,7 +2,12 @@ from django.contrib.auth.models import User, auth
 from .models import Post, Comments
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import blogSerializer, CommentSerializer
+from .serializers import (
+    blogSerializer,
+    CommentSerializer,
+    BlogCommentsSerialiser,
+    UserSerializer,
+)
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -12,7 +17,10 @@ from rest_framework.decorators import action
 from django.core.cache import cache
 
 
-class blog(viewsets.ReadOnlyModelViewSet):
+""" class to get all the blogs """
+
+
+class Blog(viewsets.ReadOnlyModelViewSet):
     queryset = Post.objects.all()
     serializer_class = blogSerializer
     permission_classes = [AllowAny]
@@ -26,14 +34,30 @@ class blog(viewsets.ReadOnlyModelViewSet):
         return data
 
 
-class blogComments(APIView):
-    def get(self, request, id):
-        data = Comments.objects.filter(blog=id)
-        serializer = CommentSerializer(data, many=True)
-        return Response(serializer.data)
+""" class to get comments of a specific blog """
 
 
-class myBlog(viewsets.ModelViewSet):
+class BlogComments(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = BlogCommentsSerialiser
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+""" class to add comments on a specific blog """
+
+
+class AddComment(viewsets.ModelViewSet):
+    queryset = Comments.objects.all()
+    serializer_class = CommentSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+
+""" class to get user-specific blogs """
+
+
+class MyBlog(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = blogSerializer
     authentication_classes = [TokenAuthentication]

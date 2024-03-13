@@ -8,7 +8,7 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ["id", "caption"]
 
 
-class AuthorSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["first_name", "last_name"]
@@ -16,7 +16,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 class blogSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True, read_only=True)
-    author = AuthorSerializer(required=False)
+    author = UserSerializer(required=False)
 
     class Meta:
         model = Post
@@ -41,14 +41,20 @@ class blogSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    user = UserSerializer(required=False)
+
     class Meta:
         model = Comments
-        fields = ["message"]
+        fields = ["message", "blog", "user"]
 
     def create(self, validated_data):
-        instance = super().create(validated_data)
-        instance.user = self.context.get("request").user
-        blog_id = self.context.get("pk")
-        instance.blog = Post.objects.get(id=blog_id)
-        instance.save()
-        return instance
+        validated_data["user"] = self.context.get("request").user
+        return super().create(validated_data)
+
+
+class BlogCommentsSerialiser(serializers.ModelSerializer):
+    comments = CommentSerializer(many=True)
+
+    class Meta:
+        model = Post
+        fields = ["id", "title", "comments"]
