@@ -5,9 +5,9 @@ from rest_framework import routers
 
 
 router = routers.DefaultRouter()
-router.register("all-blogs", views.blog)
-router.register("my-blogs", views.myBlog)
-router.register("blog-comments", views.blogComments)
-router.register("add-blog-comment", views.addComment)
+router.register("all-blogs", views.Blog)
+router.register("my-blogs", views.MyBlog)
+router.register("blog-comments", views.BlogComments)
+router.register("new-blog-comment", views.AddComment)
 
 urlpatterns = [path("", include(router.urls))]

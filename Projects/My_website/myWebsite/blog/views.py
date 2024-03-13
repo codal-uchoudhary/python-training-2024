@@ -18,7 +18,7 @@ from django.core.cache import cache
 
 
 # class to get all the blogs
-class blog(viewsets.ReadOnlyModelViewSet):
+class Blog(viewsets.ReadOnlyModelViewSet):
     queryset = Post.objects.all()
     serializer_class = blogSerializer
     permission_classes = [AllowAny]
@@ -33,7 +33,7 @@ class blog(viewsets.ReadOnlyModelViewSet):
 
 
 # class to get comments of a specific blog
-class blogComments(viewsets.ModelViewSet):
+class BlogComments(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = BlogCommentsSerialiser
     authentication_classes = [TokenAuthentication]
@@ -41,7 +41,7 @@ class blogComments(viewsets.ModelViewSet):
 
 
 # class to add comments on a specific blog
-class addComment(viewsets.ModelViewSet):
+class AddComment(viewsets.ModelViewSet):
     queryset = Comments.objects.all()
     serializer_class = CommentSerializer
     authentication_classes = [TokenAuthentication]
@@ -57,7 +57,7 @@ class addComment(viewsets.ModelViewSet):
 
 
 # class to get user-specific blogs
-class myBlog(viewsets.ModelViewSet):
+class MyBlog(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = blogSerializer
     authentication_classes = [TokenAuthentication]
