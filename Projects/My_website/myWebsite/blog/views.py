@@ -17,7 +17,9 @@ from rest_framework.decorators import action
 from django.core.cache import cache
 
 
-# class to get all the blogs
+""" class to get all the blogs """
+
+
 class Blog(viewsets.ReadOnlyModelViewSet):
     queryset = Post.objects.all()
     serializer_class = blogSerializer
@@ -32,7 +34,9 @@ class Blog(viewsets.ReadOnlyModelViewSet):
         return data
 
 
-# class to get comments of a specific blog
+""" class to get comments of a specific blog """
+
+
 class BlogComments(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = BlogCommentsSerialiser
@@ -40,23 +44,19 @@ class BlogComments(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
 
-# class to add comments on a specific blog
+""" class to add comments on a specific blog """
+
+
 class AddComment(viewsets.ModelViewSet):
     queryset = Comments.objects.all()
     serializer_class = CommentSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    # def create(self, request):
-    #     data = request.data
-    #     serializer = CommentSerializer(data=data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data)
-    #     return Response(serializer.errors)
+
+""" class to get user-specific blogs """
 
 
-# class to get user-specific blogs
 class MyBlog(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = blogSerializer

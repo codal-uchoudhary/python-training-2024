@@ -31,3 +31,10 @@ class Comments(models.Model):
     blog = models.ForeignKey(
         Post, null=True, on_delete=models.CASCADE, related_name="comments"
     )
+
+
+class Like(models.Model):
+    Like = models.ManyToManyField(User, related_name="peoples")
+    blog = models.ForeignKey(
+        Post, null=True, on_delete=models.CASCADE, related_name="comments"
+    )
