@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, auth
-from .models import Post, Comments
+from .models import Post, Comments, Like
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .serializers import (
@@ -7,6 +7,7 @@ from .serializers import (
     CommentSerializer,
     BlogCommentsSerialiser,
     UserSerializer,
+    LikeBlogSerializer,
 )
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
@@ -99,3 +100,25 @@ class MyBlog(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors)
+
+
+""" class to like a blog"""
+
+
+class LikeBlog(viewsets.ModelViewSet):
+    queryset = Like.objects.all()
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    serializer_class = LikeBlogSerializer
+
+
+class GetLikeBlog(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [AllowAny]
+
+    def get(self, request, blog):
+        blog = Post.objects.get(id=blog)
+        obj = Like.objects.get(blog=blog)
+        data = obj.people.all()
+        serializer = UserSerializer(data, many=True)
+        return Response(serializer.data)

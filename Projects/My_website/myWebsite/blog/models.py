@@ -34,7 +34,7 @@ class Comments(models.Model):
 
 
 class Like(models.Model):
-    Like = models.ManyToManyField(User, related_name="peoples")
-    blog = models.ForeignKey(
-        Post, null=True, on_delete=models.CASCADE, related_name="comments"
+    people = models.ManyToManyField(User, related_name="people_who_likes")
+    blog = models.OneToOneField(
+        Post, null=True, on_delete=models.CASCADE, related_name="likes"
     )

@@ -9,5 +9,9 @@ router.register("all-blogs", views.Blog)
 router.register("my-blogs", views.MyBlog)
 router.register("blog-comments", views.BlogComments)
 router.register("new-blog-comment", views.AddComment)
+router.register("like-blog", views.LikeBlog)
 
-urlpatterns = [path("", include(router.urls))]
+urlpatterns = [
+    path("", include(router.urls)),
+    path("like-blog/<blog>", views.GetLikeBlog.as_view()),
+]
