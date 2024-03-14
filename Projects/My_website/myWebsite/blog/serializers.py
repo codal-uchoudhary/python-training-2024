@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Post, Tag, User, Comments
+from .models import Post, Tag, User, Comments, Like
+from rest_framework.response import Response
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -58,3 +59,17 @@ class BlogCommentsSerialiser(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ["id", "title", "comments"]
+
+
+class LikeBlogSerializer(serializers.ModelSerializer):
+    people = UserSerializer(required=False)
+
+    class Meta:
+        model = Like
+        fields = ["blog", "people"]
+
+    def create(self, validated_data):
+        instance = super().create(validated_data)
+        instance.people.set((self.context.get("request").user,))
+        instance.save()
+        return instance
