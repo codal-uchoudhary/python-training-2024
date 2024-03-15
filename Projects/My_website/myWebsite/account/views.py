@@ -32,20 +32,23 @@ class LoginApi(APIView):
         data = request.data
         serializers = LoginSerializers(data=data)
         if not serializers.is_valid():
-            return Response({"status": False, "message": serializers.errors})
+            return Response(serializers.errors)
         else:
             user = authenticate(
                 username=serializers.data["username"],
                 password=serializers.data["password"],
             )
             if not user:
-                return Response({"message": "user is not found"})
+                return Response(
+                    {"status": False, "message": "Password or Email is invalid"}
+                )
             token = Token.objects.get_or_create(user=user)
+            print(type(token))
             return Response(
                 {
                     "status": True,
                     "message": "user is loged",
-                    "token": str(token),
+                    "token": str(token[0]),
                     "first_name": user.first_name,
                     "email": user.email,
                 }
