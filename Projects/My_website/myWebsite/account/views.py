@@ -42,13 +42,12 @@ class LoginApi(APIView):
                 return Response(
                     {"status": False, "message": "Password or Email is invalid"}
                 )
-            token = Token.objects.get_or_create(user=user)
-            print(type(token))
+            token, created = Token.objects.get_or_create(user=user)
             return Response(
                 {
                     "status": True,
                     "message": "user is loged",
-                    "token": str(token[0]),
+                    "token": str(token.key),
                     "first_name": user.first_name,
                     "email": user.email,
                 }

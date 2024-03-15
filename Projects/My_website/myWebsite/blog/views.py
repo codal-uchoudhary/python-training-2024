@@ -119,7 +119,7 @@ class LikeTheBlogTest(APIView):
             blog.save()
             return Response({"you liked this blog"})
         except:
-            return Response({"message": "Provided blog-id is not valid"})
+            raise Exception("provided blog-id is not valid")
 
 
 class GetLikeBlog(APIView):
@@ -133,4 +133,4 @@ class GetLikeBlog(APIView):
             serializer = UserSerializer(people, many=True)
             return Response(serializer.data)
         except:
-            return Response({"message": "provided blog-ID in not valid"})
+            raise Exception("provided blog-id is not valid")
