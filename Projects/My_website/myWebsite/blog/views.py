@@ -1,5 +1,5 @@
-from django.contrib.auth.models import User, auth
-from .models import Post, Comments, Like
+from django.contrib.auth.models import User
+from .models import Post, Comments
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .serializers import (
@@ -7,7 +7,6 @@ from .serializers import (
     CommentSerializer,
     BlogCommentsSerialiser,
     UserSerializer,
-    LikeBlogSerializer,
 )
 from rest_framework import viewsets
 from rest_framework.authentication import TokenAuthentication
@@ -105,20 +104,33 @@ class MyBlog(viewsets.ModelViewSet):
 """ class to like a blog"""
 
 
-class LikeBlog(viewsets.ModelViewSet):
-    queryset = Like.objects.all()
+class LikeTheBlogTest(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    serializer_class = LikeBlogSerializer
+
+    def post(self, request):
+        try:
+            blog = Post.objects.get(id=request.data["blog-id"])
+            obj = blog.like.filter(id=request.user.id)
+            if obj.exists():
+                blog.like.remove(request.user.id)
+                return Response({"you disliked the blog"})
+            blog.like.add(request.user.id)
+            blog.save()
+            return Response({"you liked this blog"})
+        except Exception as e:
+            raise e
 
 
 class GetLikeBlog(APIView):
     authentication_classes = [TokenAuthentication]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
-    def get(self, request, blog):
-        blog = Post.objects.get(id=blog)
-        obj = Like.objects.get(blog=blog)
-        data = obj.people.all()
-        serializer = UserSerializer(data, many=True)
-        return Response(serializer.data)
+    def get(self, request):
+        try:
+            blog = Post.objects.get(id=request.data["blog-id"])
+            people = blog.like.all()
+            serializer = UserSerializer(people, many=True)
+            return Response(serializer.data)
+        except Exception as e:
+            raise e

@@ -1,0 +1,6 @@
+
+- Create Password validator function for strong passwoard 
+- create an API to create comments on the specific blog
+- create an API to retrive comments of a specific blog
+- create an API to get users who like the blog
+- create an API to like the blog

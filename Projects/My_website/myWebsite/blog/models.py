@@ -19,7 +19,8 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, null=True, on_delete=models.SET_NULL, related_name="posts"
     )
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True)
+    like = models.ManyToManyField(User, blank=True, related_name="people")
 
     def __str__(self):
         return f"{self.title}"
@@ -30,11 +31,4 @@ class Comments(models.Model):
     message = models.CharField(max_length=400)
     blog = models.ForeignKey(
         Post, null=True, on_delete=models.CASCADE, related_name="comments"
-    )
-
-
-class Like(models.Model):
-    people = models.ManyToManyField(User, related_name="people_who_likes")
-    blog = models.OneToOneField(
-        Post, null=True, on_delete=models.CASCADE, related_name="likes"
     )
