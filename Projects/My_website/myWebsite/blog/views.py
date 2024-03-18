@@ -118,8 +118,8 @@ class LikeTheBlogTest(APIView):
             blog.like.add(request.user.id)
             blog.save()
             return Response({"you liked this blog"})
-        except:
-            raise Exception("provided blog-id is not valid")
+        except Exception as e:
+            raise e
 
 
 class GetLikeBlog(APIView):
@@ -132,5 +132,5 @@ class GetLikeBlog(APIView):
             people = blog.like.all()
             serializer = UserSerializer(people, many=True)
             return Response(serializer.data)
-        except:
-            raise Exception("provided blog-id is not valid")
+        except Exception as e:
+            raise e
